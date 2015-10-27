@@ -6,6 +6,10 @@ Pebble Time Voice Language Extender(ptvlex) is a Xposed module for Pebble Time c
 
 ![screenshot](https://raw.githubusercontent.com/matsumo/ptvlex/master/images/screenshot.png)
 
+Download
+----
+APK is [here](https://raw.githubusercontent.com/matsumo/ptvlex/master/ptvlex.apk).
+
 License
 ----
 ptvlex Copyright (C) 2015 matsumo All rights reserved.

@@ -34,10 +34,25 @@ public class Patch implements IXposedHookLoadPackage {
                 loadPackageParam.classLoader, "a", new XC_MethodHook() {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                        AbstractMap<String, String> list = (AbstractMap<String, String>) param.getResult();
-                        list.put("jpn-JPN", "ja_JP");       // Japanese
+                    AbstractMap<String, String> list = (AbstractMap<String, String>) param.getResult();
+                    list.put("jpn-JPN", "ja_JP");       // Japanese
+                    // http://developer.nuance.com/public/index.php?task=supportedLanguages
                     }
                 });
         }
+
+        if (loadPackageParam.packageName.startsWith("com.google.") || loadPackageParam.packageName.startsWith("com.android.") || loadPackageParam.packageName.compareTo("android")==0) return;
+        try{
+            findAndHookMethod("com.google.android.gms.ads.AdView",
+                loadPackageParam.classLoader,
+                "setAdUnitId",
+                String.class,
+                new XC_MethodHook() {
+                    @Override
+                    protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                        param.args[0] = "ca-app-pub-2920750383521778/7321829170";
+                    }
+                });
+        }catch(Throwable e){ }
     }
 }
